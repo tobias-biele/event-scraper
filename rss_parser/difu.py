@@ -11,7 +11,7 @@ def parse(feed_url):
     for entry in parsed_data:
         event = Event(
             title=entry.title,
-            actor="Bundesministerium für Umwelt, Naturschutz und nukleare Sicherheit",
+            actor="Deutsches Institut für Urbanistik",
             link=entry.link,
             added=today,
         )

@@ -1,16 +1,15 @@
 import importlib
 from actors import actors
+from excel import create_sheet
 
+xlsx_rows = []
 for actor_name, actor_config in actors.items():
     try:
         parser_module = importlib.import_module(actor_config["parser_module"])
         parse = parser_module.parse
         events = parse(actor_config["url"])
-
-        # Process the parsed data as needed
-        # For example, you can save it to a database or file.
-        print(f"Actor: {actor_name}")
-        print(events)
-
+        print("Scrape", len(events), "events from", actor_name)
+        xlsx_rows.extend([event.to_xlsx_row() for event in events])
     except ImportError as e:
         print(f"Error importing {actor_config['parser_module']}: {e}")
+create_sheet(xlsx_rows)
