@@ -1,13 +1,12 @@
 # TODO: Extract date, time, topic and target group from description
 
-from datetime import date
-from rss_parser import generic_rss_parser
 from event import Event
+from .utils import fetch_and_parse_rss_feed, today_date
 
 def parse(feed_url):
-    parsed_data = generic_rss_parser.fetch_and_parse_feed(feed_url)
+    parsed_data = fetch_and_parse_rss_feed(feed_url)
     events = []
-    today = date.today().strftime("%d.%m.%Y")
+    today = today_date()
     for entry in parsed_data:
         event = Event(
             title=entry.title,

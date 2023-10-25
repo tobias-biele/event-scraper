@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from datetime import date
 from event import Event
+from .utils import today_date
 
 def parse(url):
     page = requests.get(url)
@@ -12,7 +13,7 @@ def parse(url):
     elements_with_event_id = soup.find_all(lambda tag: tag.get('id', '').startswith('event-'))
 
     events = []
-    today = date.today().strftime("%d.%m.%Y")
+    today = today_date()
     date_pattern = r'(\d{2}.\d{2}.\d{4})'
     for event_element in elements_with_event_id:
         title = event_element.find('h2').text.strip()
