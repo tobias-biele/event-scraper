@@ -1,4 +1,5 @@
 import feedparser
+import re
 import requests
 from datetime import date
 
@@ -14,3 +15,7 @@ def fetch_and_parse_rss_feed(feed_url):
 
 def today_date():
     return date.today().strftime("%d.%m.%Y")
+
+def get_date_matches(text):
+    date_pattern = r'(\d{2}.\d{2}.\d{4})'
+    return re.findall(date_pattern, text)

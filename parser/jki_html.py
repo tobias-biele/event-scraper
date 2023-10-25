@@ -1,9 +1,7 @@
-import re
 import requests
 from bs4 import BeautifulSoup
-from datetime import date
 from event import Event
-from .utils import today_date
+from .utils import today_date, get_date_matches
 
 def parse(url):
     page = requests.get(url)
@@ -24,7 +22,7 @@ def parse(url):
         timeframe = event_element.find('time').text.strip()
         start = ""
         end = ""
-        date_matches = re.findall(date_pattern, timeframe)
+        date_matches = get_date_matches(timeframe)
         if len(date_matches) == 1:
             start = date_matches[0]
         elif len(date_matches) == 2:
@@ -40,9 +38,9 @@ def parse(url):
                 th = row.find('th', class_='jki-info-table__label')
                 td = row.find('td', class_='jki-info-table__content')
                 if th and td and "Beginn" in th.get_text():
-                    start = td.text.strip()
+                    start = td.text.strip().replace('. ', '.')
                 if th and td and "Ende" in th.get_text():
-                    end = td.text.strip()
+                    end = td.text.strip().replace('. ', '.')
 
         event = Event(
             title=title,
