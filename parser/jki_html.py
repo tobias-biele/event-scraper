@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from event import Event
 from .utils import today_date, get_date_matches
 
-def parse(url):
+def parse(url, options):
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
 
