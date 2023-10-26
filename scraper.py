@@ -5,6 +5,11 @@ from excel import create_sheet
 options = {
     "parse_details_pages": False,
 }
+print("Starting...")
+if options["parse_details_pages"]:
+    print("The scraper will parse details pages. This might take a while.")
+else:
+    print("The scraper will not parse details pages.")
 
 xlsx_rows = []
 for actor_name, actor_config in actors.items():
@@ -12,7 +17,7 @@ for actor_name, actor_config in actors.items():
         parser_module = importlib.import_module(actor_config["parser_module"])
         parse = parser_module.parse
         events = parse(actor_config["url"], options)
-        print("Scrape", len(events), "events from", actor_name)
+        print("Scraped", len(events), "events from", actor_name)
         xlsx_rows.extend([event.to_xlsx_row() for event in events])
     except ImportError as e:
         print(f"Error importing {actor_config['parser_module']}: {e}")

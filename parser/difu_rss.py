@@ -9,15 +9,24 @@ def parse(feed_url, options):
     events = []
     today = today_date()
     for entry in parsed_data:
+        start = ""
+        end = ""
+        timeframe = ""
         if options["parse_details_pages"]:
             details = parse_details_page(entry.link)
+            if details["start"]:
+                start = details["start"]
+            if details["end"]:
+                end = details["end"]
+            if details["timeframe"]:
+                timeframe = details["timeframe"]
 
         event = Event(
             title=entry.title,
             actor="Deutsches Institut für Urbanistik",
-            start=details["start"],
-            end=details["end"],
-            timeframe=details["timeframe"],
+            start=start,
+            end=end,
+            timeframe=timeframe,
             link=entry.link,
             added=today,
         )

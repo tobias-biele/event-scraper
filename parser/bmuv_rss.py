@@ -1,4 +1,4 @@
-# TODO: Extract date, time, topic and target group from description
+# TODO: Extract topic and target group from description
 
 from event import Event
 from .bmuv_html import parse_details_page
@@ -14,7 +14,6 @@ def parse(feed_url, options):
         if options["parse_details_pages"]:
             # Parse event details page to get date and timeframe
             try:
-                print(f"Parsing details page for {entry.link}")
                 details = parse_details_page(entry.link)
                 if details["date"]:
                     start = details["date"]
