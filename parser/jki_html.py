@@ -12,7 +12,6 @@ def parse(url, options):
 
     events = []
     today = today_date()
-    date_pattern = r'(\d{2}.\d{2}.\d{4})'
     for event_element in elements_with_event_id:
         title = event_element.find('h2').text.strip()
         institution = event_element.find("span", class_="jki-event__header__location").text
