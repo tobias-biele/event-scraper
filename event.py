@@ -1,7 +1,7 @@
 from datetime import date
 
 class Event:
-    def __init__(self, title=None, start=None, end=None, timeframe=None, topic=None, actor=None, target_group=None, link=None, added=None):
+    def __init__(self, title=None, start=None, end=None, timeframe=None, topic=None, actor=None, target_group=None, link=None, added=None, description=None):
         self.title = title
         self.start = start
         self.end = end
@@ -11,6 +11,7 @@ class Event:
         self.target_group = target_group
         self.link = link
         self.added = added if added else date.today().strftime("%d.%m.%Y")
+        self.description = description
 
     def __repr__(self):
         return f"Event(title={self.title}, start={self.start}, end={self.end}, actor={self.actor}, link={self.link}, added={self.added})"
@@ -25,5 +26,6 @@ class Event:
             self.actor,
             self.target_group,
             self.link,
-            self.added
+            self.added,
+            self.description
         ]

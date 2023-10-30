@@ -1,7 +1,14 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date, format_date
+from .utils import today_date, normalize_whitespace
+
+def get_details_page_text(url):
+    details_page = requests.get(url)
+    details_soup = BeautifulSoup(details_page.content, "html.parser")
+    content_div = details_soup.find("div", class_="content")
+    description = normalize_whitespace(content_div.get_text())
+    return description
 
 def parse(url, options):
     page = requests.get(url)
@@ -20,6 +27,11 @@ def parse(url, options):
         if len(time_and_place_values) > 1:
             end = time_and_place_values[1].text.strip()
         link = "https://www.bmel.de/" + div.find("a")["href"]
+
+        description = ""
+        if options.get("parse_details_pages", True):
+            description = get_details_page_text(link)
+        
         event = Event(
             title=title,
             start=start,
@@ -27,6 +39,7 @@ def parse(url, options):
             actor="Bundesministerium für Ernährung und Landwirtschaft",
             link=link,
             added=today,
+            description=description,
         )
         events.append(event)
     return events

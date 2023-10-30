@@ -29,6 +29,7 @@ def parse(feed_url, options):
             timeframe=timeframe,
             link=entry.link,
             added=today,
+            description=entry.description,
         )
         events.append(event)
     return events

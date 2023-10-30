@@ -27,3 +27,6 @@ def get_date_matches(text):
 def get_time_matches(text):
     time_pattern = r'(\d{2}:\d{2})'
     return re.findall(time_pattern, text)
+
+def normalize_whitespace(text):
+    return re.sub(r'\s+', ' ', text).strip()

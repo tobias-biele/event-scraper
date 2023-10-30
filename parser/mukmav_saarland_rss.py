@@ -9,6 +9,7 @@ def parse(feed_url, options):
     for entry in parsed_data:
         start = ""
         end = ""
+        description = entry.description
         if options["parse_details_pages"]:
             details = parse_details_page(entry.link)
             if details["start"]:
@@ -17,6 +18,8 @@ def parse(feed_url, options):
                 end = details["end"]
             if details["timeframe"]:
                 timeframe = details["timeframe"]
+            if details["description"]:
+                description = details["description"]
         
         event = Event(
             title=entry.title,
@@ -25,6 +28,7 @@ def parse(feed_url, options):
             timeframe=timeframe,
             link=entry.link,
             added=today,
+            description=description,
         )
         events.append(event)
     return events

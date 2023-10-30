@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from .utils import get_date_matches, get_time_matches
+from .utils import get_date_matches, get_time_matches, normalize_whitespace
 
 def parse_details_page(url):
     page = requests.get(url)
@@ -10,6 +10,7 @@ def parse_details_page(url):
     start = ""
     end = ""
     timeframe = ""
+    description = ""
     time_divs = soup.find_all("time")
     if len(time_divs) > 0:
         start_date_match = get_date_matches(time_divs[0].text)
@@ -25,9 +26,14 @@ def parse_details_page(url):
             end = end_date_match[0]
         if len(end_time_match) > 0:
             timeframe += " - " + end_time_match[0]
+    
+    content_div = soup.find("div", class_="content")
+    if content_div:
+        description = normalize_whitespace(content_div.get_text())
 
     return {
         "start": start,
         "end": end,
-        "timeframe": timeframe
+        "timeframe": timeframe,
+        "description": description,
     }
