@@ -9,6 +9,7 @@ def parse(feed_url, options):
     for entry in parsed_data:
         start = ""
         end = ""
+        timeframe = ""
         description = entry.description
         if options["parse_details_pages"]:
             details = parse_details_page(entry.link)
