@@ -2,7 +2,7 @@ import importlib
 from actors import actors
 from excel import create_sheet
 
-def run(parse_details_pages=False, filter=None):
+def run(parse_details_pages=False):
     options = {
         "parse_details_pages": parse_details_pages,
     }
@@ -19,7 +19,7 @@ def run(parse_details_pages=False, filter=None):
             parse = parser_module.parse
             events = parse(actor_config["url"], options)
             print("Scraped", len(events), "events from", actor_name)
-            xlsx_rows.extend([event.to_xlsx_row() for event in events if filter(event)])
+            xlsx_rows.extend([event.to_xlsx_row() for event in events])
         except ImportError as e:
             print(f"Error importing {actor_config['parser_module']}: {e}")
     create_sheet(xlsx_rows)
