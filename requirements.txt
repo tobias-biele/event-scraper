@@ -1,5 +1,6 @@
 beautifulsoup4
 feedparser
+openpyxl
 pandas
 requests
 XlsxWriter
