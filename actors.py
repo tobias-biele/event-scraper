@@ -27,4 +27,8 @@ actors = {
         "parser_module": "parser.mukmav_saarland_rss",
         "url": "https://www.saarland.de/mukmav/DE/aktuelles/rss-feeds/_feeds/veranstaltungen_feed.xml",
     },
+    "uba": {
+        "parser_module": "parser.uba_html",
+        "url": "https://www.umweltbundesamt.de/service/termine",
+    },
 }

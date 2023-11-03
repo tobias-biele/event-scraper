@@ -3,4 +3,5 @@ feedparser
 openpyxl
 pandas
 requests
+selenium
 XlsxWriter
