@@ -19,6 +19,10 @@ actors = {
         "parser_module": "parser.difu_rss",
         "url": "https://difu.de/rss/veranstaltungen",
     },
+    "fona": {
+        "parser_module": "parser.fona_html",
+        "url": "https://www.fona.de/de/aktuelles/veranstaltungen/",
+    },
     "jki": {
         "parser_module": "parser.jki_html",
         "url": "https://www.julius-kuehn.de/veranstaltungen",
