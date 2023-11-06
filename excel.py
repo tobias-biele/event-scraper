@@ -5,7 +5,7 @@ from event import Event
 def create_sheet(data, filename="data/events.xlsx"):
     columns = [
         "Von", "Bis", "Uhrzeit", "Titel der Veranstaltung", "Thema",
-        "Veranstaltende Institution/Organisation", "Zielgruppe", "Link zur VA", "Eintragsdatum", "Detailseite Text"
+        "Veranstaltende Institution/Organisation", "Ort", "Zielgruppe", "Link zur VA", "Eintragsdatum", "Detailseite Text"
     ]
     df = pd.DataFrame(data, columns=columns)
     # Create data directory if it doesn't exist
