@@ -18,14 +18,17 @@ def parse(url, options):
     events = []
     today = today_date()
     for div in event_title_elements:
-        time_and_place_values = div.find_next_sibling("p").find_all("span", class_="value")
+        time_place_location_values = div.find_next_sibling("p").find_all("span", class_="value")
         title = div.find("a").text.strip()
         start = ""
         end = ""
-        if len(time_and_place_values) > 0:
-            start = time_and_place_values[0].text.strip()
-        if len(time_and_place_values) > 1:
-            end = time_and_place_values[1].text.strip()
+        location = ""
+        if len(time_place_location_values) > 0:
+            start = time_place_location_values[0].text.strip()
+        if len(time_place_location_values) > 1:
+            end = time_place_location_values[1].text.strip()
+        if len(time_place_location_values) > 2:
+            location = time_place_location_values[2].text.strip()
         link = "https://www.bmel.de/" + div.find("a")["href"]
 
         description = ""
@@ -37,6 +40,7 @@ def parse(url, options):
             start=start,
             end=end,
             actor="Bundesministerium für Ernährung und Landwirtschaft",
+            location=location,
             link=link,
             added=today,
             description=description,

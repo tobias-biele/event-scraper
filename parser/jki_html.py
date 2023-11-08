@@ -34,6 +34,11 @@ def parse(url, options):
         elif len(date_matches) == 2:
             start, end = date_matches
 
+        location = ""
+        location_element = event_element.find("span", class_="jki-event__header__location")
+        if location_element:
+            location = location_element.text.strip()
+
         if options.get("parse_details_pages", True):
             # Get dates including start and end time from details page
             details_page = requests.get(link)
@@ -57,6 +62,7 @@ def parse(url, options):
             actor=institution,
             start=start,
             end=end,
+            location=location,
             link=link,
             added=today,
             description=description,

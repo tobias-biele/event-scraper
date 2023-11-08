@@ -22,9 +22,16 @@ def parse_details_page(url):
     timeframe_div = soup.find_all("div", class_="veranstaltung__field-oeffnungszeiten")
     if len(timeframe_div) > 0:
         timeframe = timeframe_div[0].text
-
+    # Find location
+    location = ""
+    location_label_div = soup.find("div", class_="sidebar-heading", string=lambda text: text and text.strip() == "Ort")
+    location_div = location_label_div.find_next_sibling('div')
+    if location_div:
+        location_elements = location_div.find("div").find_all("div")
+        location = "\n".join(element.get_text(strip=True) for element in location_elements)
     return {
         "start": start,
         "end": end,
-        "timeframe": timeframe
+        "timeframe": timeframe,
+        "location": location,
     }

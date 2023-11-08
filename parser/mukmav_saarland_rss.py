@@ -10,6 +10,7 @@ def parse(feed_url, options):
         start = ""
         end = ""
         timeframe = ""
+        location = ""
         description = entry.description
         if options["parse_details_pages"]:
             details = parse_details_page(entry.link)
@@ -19,6 +20,8 @@ def parse(feed_url, options):
                 end = details["end"]
             if details["timeframe"]:
                 timeframe = details["timeframe"]
+            if details["location"]:
+                location += details["location"]
             if details["description"]:
                 description = details["description"]
         
@@ -27,6 +30,7 @@ def parse(feed_url, options):
             start=start,
             end=end,
             timeframe=timeframe,
+            location=location,
             link=entry.link,
             added=today,
             description=description,

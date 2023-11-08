@@ -27,6 +27,12 @@ def parse(url, options):
             start = date_divs[0].text.strip()
         if len(date_divs) > 1:
             end = get_date_matches(date_divs[1].text.strip())[0]
+        location = ""
+        location_div = div.find("span", class_="c-topline__location")
+        if location_div:
+            location = location_div.text.strip()
+            if "Ort: " in location:
+                location = location.split("Ort: ")[1].strip()
 
         description = ""
         if options.get("parse_details_pages", True):
@@ -36,6 +42,7 @@ def parse(url, options):
             title=title,
             start=start,
             end=end,
+            location=location,
             link=link,
             added=today,
             description=description,

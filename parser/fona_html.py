@@ -8,7 +8,11 @@ def get_details_page_text(url):
     details_soup = BeautifulSoup(details_page.content, "html.parser")
     content_div = details_soup.find("article", class_="sp-default")
     description = normalize_whitespace(content_div.get_text())
-    return description
+    location = ""
+    location_element = content_div.find("span", class_="content--location")
+    if location_element:
+        location = location_element.text.strip()
+    return description, location
 
 def parse(url, options):
     page = requests.get(url)
@@ -32,13 +36,15 @@ def parse(url, options):
                 end = date_matches[1]
 
         description = content_div.find("p").text.strip()
+        location = ""
         if options.get("parse_details_pages", True):
-            description = get_details_page_text(link)
+            description, location = get_details_page_text(link)
         
         event = Event(
             title=title,
             start=start,
             end=end,
+            location=location,
             link=link,
             added=today,
             description=description,

@@ -26,6 +26,14 @@ def parse_details_page(url):
             end = end_date_match[0]
         if len(end_time_match) > 0:
             timeframe += " - " + end_time_match[0]
+
+    # Find location
+    location = ""
+    location_headline = soup.find("h2", string="Veranstaltungsort")
+    if location_headline:
+        p_element = location_headline.next_sibling.next_sibling
+        address_lines = [line.strip() for line in p_element.get_text().split('\n') if line.strip()]
+        location = "\n".join(address_lines)
     
     content_div = soup.find("div", class_="content")
     if content_div:
@@ -35,5 +43,6 @@ def parse_details_page(url):
         "start": start,
         "end": end,
         "timeframe": timeframe,
+        "location": location,
         "description": description,
     }
