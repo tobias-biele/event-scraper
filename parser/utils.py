@@ -16,9 +16,17 @@ def fetch_and_parse_rss_feed(feed_url):
 def today_date():
     return date.today().strftime("%d.%m.%Y")
 
-def format_date(str):
-    date = datetime.strptime(str, "%Y-%m-%d")
-    return date.strftime("%d.%m.%Y")
+def format_date(str, format_type=0):
+    if format_type == 0:
+        date = datetime.strptime(str, "%Y-%m-%d")
+        return date.strftime("%d.%m.%Y")
+    elif format_type == 1:
+        date_format = "%d. %B %Y"
+        date = datetime.strptime(str, date_format)
+        return date.strftime("%d.%m.%Y")
+    else:
+        print("Unknown date format type")
+        return str
 
 def get_date_matches(text):
     date_pattern = r'(\d{2}.\d{2}.\d{4})'
