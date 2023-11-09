@@ -11,6 +11,10 @@ actors = {
         "parser_module": "parser.bmbf_html",
         "url": "https://www.bildung-forschung.digital/digitalezukunft/de/mediathek/veranstaltungen/_functions/teaserlist_e132d2ec54",
     },
+    "bmdv": {
+        "parser_module": "parser.bmdv_html",
+        "url": "https://bmdv.bund.de/DE/Service/Aktuelle-Termine/aktuelle-termine.html",
+    },
     "bmel": {
         "parser_module": "parser.bmel_html",
         "url": "https://www.bmel.de/SiteGlobals/Forms/Suche/DE/Terminsuche/Terminsuche_Formular.html",
