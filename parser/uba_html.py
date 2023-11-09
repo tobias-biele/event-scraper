@@ -6,7 +6,7 @@ from selenium import webdriver
 from event import Event
 from .utils import today_date, normalize_whitespace
 
-def get_details_page_text(url):
+def parse_details_page(url):
     details_page = requests.get(url)
     details_soup = BeautifulSoup(details_page.content, "html.parser")
     content_div = details_soup.find("div", class_="article-content")
@@ -49,7 +49,7 @@ def parse(url, options):
 
         description = description_element.text.strip()
         if options.get("parse_details_pages", True):
-            description = get_details_page_text(link)
+            description = parse_details_page(link)
 
         event = Event(
             title=title,

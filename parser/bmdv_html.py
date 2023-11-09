@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from event import Event
 from .utils import today_date, get_date_matches, get_time_matches, normalize_whitespace
 
-def get_details_page_text(url):
+def parse_details_page(url):
     details_page = requests.get(url)
     details_soup = BeautifulSoup(details_page.content, "html.parser")
     content_div = details_soup.find("div", class_="content")
@@ -51,7 +51,7 @@ def parse(url, options):
 
         description = ""
         if options["parse_details_pages"]:
-            start, end, location, description = get_details_page_text(link)
+            start, end, location, description = parse_details_page(link)
 
         event = Event(
             title=title,

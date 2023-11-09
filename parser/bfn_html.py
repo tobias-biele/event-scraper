@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from event import Event
 from .utils import today_date, get_date_matches, get_time_matches, normalize_whitespace
 
-def get_details_page_text(url):
+def parse_details_page(url):
     details_page = requests.get(url)
     details_soup = BeautifulSoup(details_page.content, "html.parser")
     content_div = details_soup.find("div", id="block-content")
@@ -63,7 +63,7 @@ def parse(url, options):
         actor = ""
         target_group = ""
         if options.get("parse_details_pages", True):
-            actor, target_group, description = get_details_page_text(link)
+            actor, target_group, description = parse_details_page(link)
         
         event = Event(
             title=title,
