@@ -22,4 +22,8 @@ def run(parse_details_pages=False):
             xlsx_rows.extend([event.to_xlsx_row() for event in events])
         except ImportError as e:
             print(f"Error importing {actor_config['parser_module']}: {e}")
+        except Exception as e:
+            print(f"Error parsing {actor_name}: {e}")
     create_sheet(xlsx_rows)
+
+run(parse_details_pages=True)
