@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date, get_date_matches, normalize_whitespace
+from .utils import today_date_string, get_date_matches, normalize_whitespace
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -18,7 +18,7 @@ def parse(url, options):
     elements_with_event_id = soup.find_all(lambda tag: tag.get('id', '').startswith('event-'))
 
     events = []
-    today = today_date()
+    today = today_date_string()
     for event_element in elements_with_event_id:
         title = event_element.find('h2').text.strip()
         institution = event_element.find("span", class_="jki-event__header__location").text

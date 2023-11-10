@@ -13,7 +13,7 @@ def fetch_and_parse_rss_feed(feed_url):
         print(f"Error fetching feed from {feed_url}: {e}")
         return []
 
-def today_date():
+def today_date_string():
     return date.today().strftime("%d.%m.%Y")
 
 def format_date(str, format_type=0):

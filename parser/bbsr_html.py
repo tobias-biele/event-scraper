@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date, format_date, normalize_whitespace
+from .utils import today_date_string, format_date, normalize_whitespace
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -16,7 +16,7 @@ def parse(url, options):
 
     event_title_elements = soup.find_all("h4")
     events = []
-    today = today_date()
+    today = today_date_string()
     for div in event_title_elements:
         title = div.find("a").find("span").text.strip()
         link = "https://www.bbsr.bund.de/" + div.find("a")["href"].split(";")[0]

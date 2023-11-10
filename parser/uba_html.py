@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 from event import Event
-from .utils import today_date, normalize_whitespace
+from .utils import today_date_string, normalize_whitespace
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -34,7 +34,7 @@ def parse(url, options):
     # Parse the events
     event_title_elements = soup.find_all("h5")
     events = []
-    today = today_date()
+    today = today_date_string()
     for title_element in event_title_elements:
         title = title_element.text.strip()
         start = ""

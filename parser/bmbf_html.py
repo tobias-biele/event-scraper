@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date, get_date_matches, normalize_whitespace
+from .utils import today_date_string, get_date_matches, normalize_whitespace
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -15,7 +15,7 @@ def parse(url, options):
 
     event_divs = soup.find_all("a", class_="c-teaser")
     events = []
-    today = today_date()
+    today = today_date_string()
     for div in event_divs:
         event_title_element = div.find("h2", class_="c-teaser__headline")
         title = event_title_element.find("span").text.strip()

@@ -2,12 +2,12 @@
 
 from event import Event
 from .difu_html import parse_details_page
-from .utils import fetch_and_parse_rss_feed, today_date
+from .utils import fetch_and_parse_rss_feed, today_date_string
 
 def parse(feed_url, options):
     parsed_data = fetch_and_parse_rss_feed(feed_url)
     events = []
-    today = today_date()
+    today = today_date_string()
     for entry in parsed_data:
         start = ""
         end = ""

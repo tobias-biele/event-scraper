@@ -2,7 +2,7 @@ import locale
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date, format_date
+from .utils import today_date_string, format_date
 
 locale.setlocale(locale.LC_TIME, "de_DE")
 
@@ -12,7 +12,7 @@ def parse(url, options):
 
     event_elements = soup.find("div", class_="panel-group").find_all("div", class_="panel panel-default")
     events = []
-    today = today_date()
+    today = today_date_string()
     for element in event_elements:
         heading_element = element.find("div", class_="panel-heading")
         collapse_element = element.find("div", class_="panel-collapse")

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date, get_date_matches, get_time_matches, normalize_whitespace
+from .utils import today_date_string, get_date_matches, get_time_matches, normalize_whitespace
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -21,7 +21,7 @@ def parse(url, options):
     else:
         event_table_rows = soup.find_all("tr")
     events = []
-    today = today_date()
+    today = today_date_string()
     for element in event_table_rows:
         table_columns = element.find_all("td")
         if len(table_columns) < 4: # skip header row

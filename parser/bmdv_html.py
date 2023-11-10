@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date, get_date_matches, get_time_matches, normalize_whitespace
+from .utils import today_date_string, get_date_matches, get_time_matches, normalize_whitespace
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -35,7 +35,7 @@ def parse(url, options):
     event_elements = soup.find_all('li', class_='card-list-item')
 
     events = []
-    today = today_date()
+    today = today_date_string()
 
     for event_element in event_elements:
         title = event_element.find('a', class_="card-link").find("strong").text.strip()
