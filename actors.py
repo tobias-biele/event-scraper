@@ -35,6 +35,10 @@ actors = {
         "parser_module": "parser.fona_html",
         "url": "https://www.fona.de/de/aktuelles/veranstaltungen/",
     },
+    "hlnug": {
+        "parser_module": "parser.hlnug_html",
+        "url": "https://www.hlnug.de/themen/klimawandel-und-anpassung/aktuelles-termine",
+    },
     "jki": {
         "parser_module": "parser.jki_html",
         "url": "https://www.julius-kuehn.de/veranstaltungen",
