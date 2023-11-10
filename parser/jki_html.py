@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date_string, get_date_matches, normalize_whitespace
+from .utils import today_date_string, get_date_matches, normalize_whitespace, unformat_date
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -20,19 +20,23 @@ def parse(url, options):
     events = []
     today = today_date_string()
     for event_element in elements_with_event_id:
-        title = event_element.find('h2').text.strip()
-        institution = event_element.find("span", class_="jki-event__header__location").text
-        link = 'https://www.julius-kuehn.de'+event_element.get('href')
-        timeframe = event_element.find('time').text.strip()
+        # Get the dates of the event and skip it if it's before the cut-off date (dates are also scraped from the details page, if the option is set)
         start = ""
         end = ""
-        description = ""
-        # Extract the dates (for when details page is not parsed or not available)
-        date_matches = get_date_matches(timeframe)
+        dates_text = event_element.find('time').text.strip()
+        date_matches = get_date_matches(dates_text)
         if len(date_matches) == 1:
             start = date_matches[0]
         elif len(date_matches) == 2:
             start, end = date_matches
+
+        if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            continue
+
+        title = event_element.find('h2').text.strip()
+        institution = event_element.find("span", class_="jki-event__header__location").text
+        link = 'https://www.julius-kuehn.de'+event_element.get('href')
+        description = ""
 
         location = ""
         location_element = event_element.find("span", class_="jki-event__header__location")

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date_string, normalize_whitespace
+from .utils import today_date_string, normalize_whitespace, unformat_date
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -19,16 +19,20 @@ def parse(url, options):
     today = today_date_string()
     for div in event_title_elements:
         time_place_location_values = div.find_next_sibling("p").find_all("span", class_="value")
-        title = div.find("a").text.strip()
+        # Get the dates of the event and skip it if it's before the cut-off date
         start = ""
         end = ""
-        location = ""
         if len(time_place_location_values) > 0:
             start = time_place_location_values[0].text.strip()
         if len(time_place_location_values) > 1:
             end = time_place_location_values[1].text.strip()
+        if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            continue
+
+        location = ""
         if len(time_place_location_values) > 2:
             location = time_place_location_values[2].text.strip()
+        title = div.find("a").text.strip()
         link = "https://www.bmel.de/" + div.find("a")["href"]
 
         description = ""

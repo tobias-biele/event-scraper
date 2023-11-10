@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date_string, get_date_matches, get_time_matches, normalize_whitespace
+from .utils import today_date_string, get_date_matches, get_time_matches, normalize_whitespace, unformat_date
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -35,13 +35,9 @@ def parse(url, options):
     events = []
     today = today_date_string()
     for element in event_element:
-        a_element = element.find("a")
-        title = a_element.find("span").text.strip()
-        link = "https://www.bfn.de" + a_element["href"]
-        location = element.find("div", class_="field--name-field-location").find("span").text.strip()
+        # Get the dates of the event and skip it if it's before the cut-off date
         start = ""
         end = ""
-        timeframe = ""
         start_div = element.find("div", class_="field--name-field-event-startdate")
         end_div = element.find("div", class_="field--name-field-event-enddate")
         if start_div:
@@ -58,6 +54,13 @@ def parse(url, options):
                 end = end_date[0]
             if end_time:
                 end += " " + end_time[0]
+        if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            continue
+
+        a_element = element.find("a")
+        title = a_element.find("span").text.strip()
+        link = "https://www.bfn.de" + a_element["href"]
+        location = element.find("div", class_="field--name-field-location").find("span").text.strip()
 
         description = element.find("div", class_="field--name-field-abstract").text.strip()
         actor = ""
@@ -69,7 +72,6 @@ def parse(url, options):
             title=title,
             start=start,
             end=end,
-            timeframe=timeframe,
             actor=actor,
             target_group=target_group,
             location=location,

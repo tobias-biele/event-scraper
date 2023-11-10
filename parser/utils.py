@@ -26,7 +26,12 @@ def format_date(str, format_type=0):
         return date.strftime("%d.%m.%Y")
     else:
         print("Unknown date format type")
-        return str
+    
+def unformat_date(str):
+    # Cut off time if present
+    str = str.split(" ")[0]
+    date = datetime.strptime(str, "%d.%m.%Y")
+    return date.strftime("%Y-%m-%d")
 
 def get_date_matches(text):
     date_pattern = r'(\d{2}.\d{2}.\d{4})'

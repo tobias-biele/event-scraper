@@ -2,7 +2,7 @@
 
 from event import Event
 from .bmuv_html import parse_details_page
-from .utils import fetch_and_parse_rss_feed, today_date_string
+from .utils import fetch_and_parse_rss_feed, today_date_string, unformat_date
 
 def parse(feed_url, options):
     parsed_data = fetch_and_parse_rss_feed(feed_url)
@@ -27,6 +27,10 @@ def parse(feed_url, options):
                     location = details["location"]
             except Exception as e:
                 print(f"Error parsing details page for {entry.link}: {e}")
+        
+        # Skip the event if it's before the cut-off date
+        if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            continue
 
         event = Event(
             title=entry.title,
