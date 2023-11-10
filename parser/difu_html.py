@@ -25,7 +25,9 @@ def parse_details_page(url):
     # Find location
     location = ""
     location_label_div = soup.find("div", class_="sidebar-heading", string=lambda text: text and text.strip() == "Ort")
-    location_div = location_label_div.find_next_sibling('div')
+    location_div = None
+    if location_label_div:
+        location_div = location_label_div.find_next_sibling('div')
     if location_div:
         location_elements = location_div.find("div").find_all("div")
         location = "\n".join(element.get_text(strip=True) for element in location_elements)
