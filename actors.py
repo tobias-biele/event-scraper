@@ -59,6 +59,10 @@ actors = {
         "parser_module": "parser.sachsen_html",
         "url": "https://www.klima.sachsen.de/regionalveranstaltungen-2022-25339.html",
     },
+    "tlubn": {
+        "parser_module": "parser.tlubn_html",
+        "url": "https://tlubn.thueringen.de/service/termine-und-veranstaltungen",
+    },
     "uba": {
         "parser_module": "parser.uba_html",
         "url": "https://www.umweltbundesamt.de/service/termine",
