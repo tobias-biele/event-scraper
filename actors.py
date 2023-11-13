@@ -43,6 +43,10 @@ actors = {
         "parser_module": "parser.jki_html",
         "url": "https://www.julius-kuehn.de/veranstaltungen",
     },
+    "lfu_bayern": {
+        "parser_module": "parser.lfu_bayern_html",
+        "url": "https://www.lfu.bayern.de/veranstaltungen/index.htm",
+    },
     "mukmav_saarland": {
         "parser_module": "parser.mukmav_saarland_rss",
         "url": "https://www.saarland.de/mukmav/DE/aktuelles/rss-feeds/_feeds/veranstaltungen_feed.xml",
