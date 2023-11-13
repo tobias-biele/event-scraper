@@ -51,6 +51,10 @@ actors = {
         "parser_module": "parser.mukmav_saarland_rss",
         "url": "https://www.saarland.de/mukmav/DE/aktuelles/rss-feeds/_feeds/veranstaltungen_feed.xml",
     },
+    "rlp": {
+        "parser_module": "parser.rlp_html",
+        "url": "https://www.klimawandel-rlp.de/de/ueber-uns/veranstaltungen/",
+    },
     "sachsen": {
         "parser_module": "parser.sachsen_html",
         "url": "https://www.klima.sachsen.de/regionalveranstaltungen-2022-25339.html",
