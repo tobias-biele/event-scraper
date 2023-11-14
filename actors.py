@@ -47,6 +47,10 @@ actors = {
         "parser_module": "parser.lfu_bayern_html",
         "url": "https://www.lfu.bayern.de/veranstaltungen/index.htm",
     },
+    "lubw": {
+        "parser_module": "parser.lubw_html",
+        "url": "https://www.lubw.baden-wuerttemberg.de/klimawandel-und-anpassung/veranstaltungen",
+    },
     "mukmav_saarland": {
         "parser_module": "parser.mukmav_saarland_rss",
         "url": "https://www.saarland.de/mukmav/DE/aktuelles/rss-feeds/_feeds/veranstaltungen_feed.xml",
