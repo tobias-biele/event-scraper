@@ -55,6 +55,10 @@ actors = {
         "parser_module": "parser.mukmav_saarland_rss",
         "url": "https://www.saarland.de/mukmav/DE/aktuelles/rss-feeds/_feeds/veranstaltungen_feed.xml",
     },
+    "mluk_bb": {
+        "parser_module": "parser.mluk_brandenburg_html",
+        "url": "https://www.brandenburg.de/alias/bb1.c.475053.de?sv=MLUK",
+    },
     "niko": {
         "parser_module": "parser.niko_html",
         "url": "https://niko-klima.de/veranstaltungen/",
