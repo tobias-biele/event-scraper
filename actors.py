@@ -55,6 +55,10 @@ actors = {
         "parser_module": "parser.mukmav_saarland_rss",
         "url": "https://www.saarland.de/mukmav/DE/aktuelles/rss-feeds/_feeds/veranstaltungen_feed.xml",
     },
+    "niko": {
+        "parser_module": "parser.niko_html",
+        "url": "https://niko-klima.de/veranstaltungen/",
+    },
     "rlp": {
         "parser_module": "parser.rlp_html",
         "url": "https://www.klimawandel-rlp.de/de/ueber-uns/veranstaltungen/",
