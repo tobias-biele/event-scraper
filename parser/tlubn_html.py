@@ -66,6 +66,9 @@ def parse(url, options):
         location = ""
         timeframe = ""
         description = ""
+        topic = ""
+        actor = ""
+        target_group = ""
         if options.get("parse_details_pages", True):
             topic, actor, location, target_group, description = parse_details_page(link)
 
