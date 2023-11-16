@@ -4,7 +4,7 @@ import requests
 from datetime import date, datetime
 
 import locale
-locale.setlocale(locale.LC_TIME, 'de_DE')
+locale.setlocale(locale.LC_TIME, 'de_DE.ISO8859-1')
 
 def fetch_and_parse_rss_feed(feed_url):
     try:
@@ -16,8 +16,11 @@ def fetch_and_parse_rss_feed(feed_url):
         print(f"Error fetching feed from {feed_url}: {e}")
         return []
 
-def today_date_string():
-    return date.today().strftime("%d.%m.%Y")
+def today_date_string(reverse_format=False):
+    if reverse_format:
+        return date.today().strftime("%Y-%m-%d")
+    else:
+        return date.today().strftime("%d.%m.%Y")
 
 def today_date():
     return date.today()

@@ -8,6 +8,9 @@ def create_sheet(data, filename="data/events.xlsx"):
         "Veranstaltende Institution/Organisation", "Ort", "Zielgruppe", "Link zur VA", "Eintragsdatum", "Detailseite Text"
     ]
     df = pd.DataFrame(data, columns=columns)
+    df['date_column'] = pd.to_datetime(df['Von'], format='%d.%m.%Y %H:%M', errors='coerce').combine_first(pd.to_datetime(df['Von'], format='%d.%m.%Y', errors='coerce'))
+    df.sort_values(by='date_column', inplace=True)
+    df.drop(columns=['date_column'], inplace=True)
     # Create data directory if it doesn't exist
     if not os.path.exists("data"):
         os.makedirs("data")
