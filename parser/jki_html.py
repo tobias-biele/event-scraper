@@ -34,7 +34,7 @@ def parse(url, options):
             continue
 
         title = event_element.find('h2').text.strip()
-        institution = event_element.find("span", class_="jki-event__header__location").text
+        institution = event_element.find("span", class_="jki-event__header__location").text.strip()
         link = 'https://www.julius-kuehn.de'+event_element.get('href')
         description = ""
 
@@ -54,9 +54,9 @@ def parse(url, options):
                     th = row.find('th', class_='jki-info-table__label')
                     td = row.find('td', class_='jki-info-table__content')
                     if th and td and "Beginn" in th.get_text():
-                        start = td.text.strip().replace('. ', '.')
+                        start = td.text.strip().replace('. ', '.').replace(',', '').replace(' Uhr', '')
                     if th and td and "Ende" in th.get_text():
-                        end = td.text.strip().replace('. ', '.')
+                        end = td.text.strip().replace('. ', '.').replace(',', '').replace(' Uhr', '')
             
             # Get description from details page
             description = parse_details_page(link)

@@ -24,8 +24,12 @@ def parse(url, options):
         end = ""
         if len(time_place_location_values) > 0:
             start = time_place_location_values[0].text.strip()
+            if start.endswith(" Uhr"):
+                start = start[:-4]
         if len(time_place_location_values) > 1:
             end = time_place_location_values[1].text.strip()
+            if end.endswith(" Uhr"):
+                end = end[:-4]
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
             continue
 

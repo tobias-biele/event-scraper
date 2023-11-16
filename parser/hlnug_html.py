@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date_string, format_date, normalize_whitespace, get_date_matches, get_time_matches
+from .utils import today_date_string, format_date, normalize_whitespace, get_date_matches, unformat_date
 
 def parse_details_page(url):
     details_page = requests.get(url)
@@ -48,7 +48,7 @@ def parse(url, options):
                     date_match_formatted = format_date(date_match, format_type=2)
             if date_match != "" and len(date_match) > len(start):
                 start = date_match_formatted
-        if start != None and start != "" and options.get("cut_off_date", None) and start < options["cut_off_date"]:
+        if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
             break
         link = "https://www.hlnug.de" + body_element.find("a").get("href")
         location = ""
