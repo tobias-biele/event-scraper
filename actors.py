@@ -75,6 +75,10 @@ actors = {
         "parser_module": "parser.tlubn_html",
         "url": "https://tlubn.thueringen.de/service/termine-und-veranstaltungen",
     },
+    "uan": {
+        "parser_module": "parser.uan_html",
+        "url": "https://www.uan.de/veranstaltungen",
+    },
     "uba": {
         "parser_module": "parser.uba_html",
         "url": "https://www.umweltbundesamt.de/service/termine",

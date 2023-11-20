@@ -58,6 +58,10 @@ def get_date_matches(text, pattern=r'(\d{2}.\d{2}.\d{4})'):
     date_pattern = pattern
     return re.findall(date_pattern, text)
 
+def get_year_matches(text):
+    year_pattern = r'(\d{4})'
+    return re.findall(year_pattern, text)
+
 def get_time_matches(text):
     time_pattern = r'(\d{2}:\d{2})'
     return re.findall(time_pattern, text)
