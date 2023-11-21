@@ -46,5 +46,3 @@ def run(parse_details_pages=False, cut_off_date=None, include=None, exclude=None
         except Exception as e:
             print(f"Error parsing {actor_name}: {e}")
     create_sheet(xlsx_rows)
-
-run(parse_details_pages=True)
