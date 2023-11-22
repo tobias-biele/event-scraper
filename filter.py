@@ -1,6 +1,8 @@
 from excel import read_sheet, create_sheet
 
-keywords = [
+# PARAMETER SECTION
+# --------------------------------
+KEYWORDS = [
         "Hitze", 
         "Starkregen", 
         "Hochwasser", 
@@ -19,8 +21,9 @@ keywords = [
         "Verkehrsplanung",
         "Straßengestaltung",
     ]
+# --------------------------------
 
-def filter_by_keywords():
+def filter_by_keywords(keywords):
     events = read_sheet("data/events.xlsx")
     included = []
     excluded = []
@@ -32,3 +35,5 @@ def filter_by_keywords():
         excluded.append(event.to_xlsx_row())
     create_sheet(included, "data/events_filtered.xlsx")
     create_sheet(excluded, "data/events_filtered_excluded.xlsx")
+
+filter_by_keywords(KEYWORDS)
