@@ -9,6 +9,7 @@ def parse(url, options):
 
     event_elements = soup.find("table").find_all("tr")
     events = []
+    skipped_count = 0
     today = today_date_string()
     for element in event_elements:
         columns = element.find_all("td")
@@ -23,6 +24,7 @@ def parse(url, options):
             timeframe = time_matches[0]
 
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            skipped_count += 1
             continue
 
         event_text_column = columns[1]
@@ -40,4 +42,4 @@ def parse(url, options):
             description=description,
         )
         events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

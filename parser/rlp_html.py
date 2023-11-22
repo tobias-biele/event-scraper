@@ -25,7 +25,7 @@ def parse(url, options):
         timeframe = time_matches[0] if len(time_matches) == 1 else f"{time_matches[0]} - {time_matches[1]}"
 
     if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
-        return []
+        return [], "(1 skipped)"
 
     title = normalize_whitespace(content_element.find("h1").get_text())
     link = description_element.find("a")["href"]
@@ -42,4 +42,4 @@ def parse(url, options):
         description=description,
     )
     events.append(event)
-    return events
+    return events, "(0 skipped)"

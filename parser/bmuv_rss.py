@@ -7,6 +7,7 @@ from .utils import fetch_and_parse_rss_feed, today_date_string, unformat_date
 def parse(feed_url, options):
     parsed_data = fetch_and_parse_rss_feed(feed_url)
     events = []
+    skipped_count = 0
     today = today_date_string()
     for entry in parsed_data:
         start = ""
@@ -30,6 +31,7 @@ def parse(feed_url, options):
         
         # Skip the event if it's before the cut-off date
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            skipped_count += 1
             continue
 
         event = Event(
@@ -44,4 +46,4 @@ def parse(feed_url, options):
             description=entry.description,
         )
         events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

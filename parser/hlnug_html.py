@@ -16,6 +16,7 @@ def parse(url, options):
 
     event_elements = soup.find("div", class_="main").find_all("div", class_="frame")
     events = []
+    skipped_count = 0
     today = today_date_string()
     for element in event_elements[1:]: # skip main headline element
         body_element = element.find("div", class_="ce-bodytext")
@@ -49,6 +50,7 @@ def parse(url, options):
             if date_match != "" and len(date_match) > len(start):
                 start = date_match_formatted
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            skipped_count += 1
             break
         link = "https://www.hlnug.de" + body_element.find("a").get("href")
         location = ""
@@ -64,4 +66,4 @@ def parse(url, options):
             description=description,
         )
         events.append(event)
-    return events
+    return events, f"(>={skipped_count} skipped)"

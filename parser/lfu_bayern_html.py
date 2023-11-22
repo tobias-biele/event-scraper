@@ -34,6 +34,7 @@ def parse(url, options):
     soup = BeautifulSoup(page.content, "html.parser")
 
     events = []
+    skipped_count = 0
     today = today_date_string()
     year_sections = soup.find("div", class_="cmp_list_group").find_all("ul")
     for year_section in year_sections:
@@ -47,6 +48,7 @@ def parse(url, options):
             end = "" if not "bis" in date_text else date_text.split("bis ")[1] + year
 
             if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+                skipped_count += 1
                 continue
 
             title = element.find("a").get_text()
@@ -76,4 +78,4 @@ def parse(url, options):
                 description=description,
             )
             events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

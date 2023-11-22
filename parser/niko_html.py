@@ -9,6 +9,7 @@ def parse(url, options):
 
     event_section = soup.find("div", class_="et_pb_tab_content")
     events = []
+    skipped_count = 0
     today = today_date_string()
     i = 0
     start = ""
@@ -19,6 +20,7 @@ def parse(url, options):
         if i == 0 or i == 2 and len(event_text) < 20: # if the text is a date, it will be shorter than 20 characters
             start = format_date(event_text, 1)
             if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+                skipped_count += 1
                 skip_event = True # skip the event if it's before the cut-off date
             i += 1
         elif i == 1:
@@ -34,4 +36,4 @@ def parse(url, options):
             title = ""
             skip_event = False
             i = 0
-    return events
+    return events, f"({skipped_count} skipped)"

@@ -18,6 +18,7 @@ def parse(url, options):
     elements_with_event_id = soup.find_all(lambda tag: tag.get('id', '').startswith('event-'))
 
     events = []
+    skipped_count = 0
     today = today_date_string()
     for event_element in elements_with_event_id:
         # Get the dates of the event and skip it if it's before the cut-off date (dates are also scraped from the details page, if the option is set)
@@ -31,6 +32,7 @@ def parse(url, options):
             start, end = date_matches
 
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            skipped_count += 1
             continue
 
         title = event_element.find('h2').text.strip()
@@ -72,4 +74,4 @@ def parse(url, options):
             description=description,
         )
         events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

@@ -38,8 +38,9 @@ def run(parse_details_pages=False, cut_off_date=None, include=None, exclude=None
         try:
             parser_module = importlib.import_module(actor_config["parser_module"])
             parse = parser_module.parse
-            events = parse(actor_config["url"], options)
-            print("Scraped", len(events), "events from", actor_name)
+            events, skipped_message = parse(actor_config["url"], options)
+            output_message = f"Scraped {len(events)} events from {actor_name} {skipped_message}"
+            print(output_message)
             xlsx_rows.extend([event.to_xlsx_row() for event in events])
         except ImportError as e:
             print(f"Error importing {actor_config['parser_module']}: {e}")

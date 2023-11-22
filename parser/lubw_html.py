@@ -1,3 +1,5 @@
+# TODO: Needs to be reworked since the website has changed
+
 import requests
 from bs4 import BeautifulSoup
 from event import Event
@@ -16,10 +18,11 @@ def parse(url, options):
 
     coming_events_headline = soup.select_one('h2:-soup-contains("Anstehende Veranstaltungen")')
     if coming_events_headline == None:
-        return []
+        return [], ""
     event_section = coming_events_headline.find_next_sibling("section")
     a_tags = event_section.find_all("a")
     events = []
+    skipped_count = 0
     today = today_date_string()
     start = ""
     title = ""
@@ -32,6 +35,7 @@ def parse(url, options):
                 start = start[:-1]
             start = format_date(start, 1)
             if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+                skipped_count += 1
                 skip_event = True # skip the event if it's before the cut-off date
             i += 1
         elif i == 1:
@@ -66,4 +70,4 @@ def parse(url, options):
                 added=today,
             )
             events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

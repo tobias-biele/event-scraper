@@ -35,6 +35,7 @@ def parse(url, options):
     event_elements = soup.find_all('li', class_='card-list-item')
 
     events = []
+    skipped_count = 0
     today = today_date_string()
 
     for event_element in event_elements:
@@ -44,6 +45,7 @@ def parse(url, options):
         start = dates[0] if len(dates) > 0 else ""
         end = dates[1] if len(dates) > 1 else ""
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            skipped_count += 1
             continue
 
         title = event_element.find('a', class_="card-link").find("strong").text.strip()
@@ -57,6 +59,7 @@ def parse(url, options):
         if options["parse_details_pages"]:
             start, end, location, description = parse_details_page(link)
             if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+                skipped_count += 1
                 continue
 
         event = Event(
@@ -70,4 +73,4 @@ def parse(url, options):
             description=description
         )
         events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

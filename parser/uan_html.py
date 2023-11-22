@@ -9,6 +9,7 @@ def parse(url, options):
 
     events_section_headings = soup.find("article", class_="content").find_all("div", class_="bg-white-start")
     events = []
+    skipped_count = 0
     today = today_date_string()
     current_year = today_date().year
     current_month = 0 # Start at 0 to indicate that no month has been set yet. The page might contain outdated events from previous month.
@@ -39,6 +40,7 @@ def parse(url, options):
             start = f"{day:02d}.{month:02d}.{current_year}" # Pad day and month with zeros
         
             if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+                skipped_count += 1
                 continue
 
             title_element = event_element.find("h3")
@@ -66,4 +68,4 @@ def parse(url, options):
                 description=description,
             )
             events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

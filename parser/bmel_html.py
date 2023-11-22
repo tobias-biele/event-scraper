@@ -16,6 +16,7 @@ def parse(url, options):
 
     event_title_elements = soup.find_all("h2", class_="c-searchteaser__h")
     events = []
+    skipped_count = 0
     today = today_date_string()
     for div in event_title_elements:
         time_place_location_values = div.find_next_sibling("p").find_all("span", class_="value")
@@ -31,6 +32,7 @@ def parse(url, options):
             if end.endswith(" Uhr"):
                 end = end[:-4]
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            skipped_count += 1
             continue
 
         location = ""
@@ -54,4 +56,4 @@ def parse(url, options):
             description=description,
         )
         events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"

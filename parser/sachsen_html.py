@@ -12,6 +12,7 @@ def parse(url, options):
 
     event_elements = soup.find("div", class_="panel-group").find_all("div", class_="panel panel-default")
     events = []
+    skipped_count = 0
     today = today_date_string()
     for element in event_elements:
         heading_element = element.find("div", class_="panel-heading")
@@ -24,6 +25,7 @@ def parse(url, options):
             date_string = heading.split("am ")[1]
             start = format_date(date_string, format_type=1)
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
+            skipped_count += 1
             continue
 
         collapse_element = element.find("div", class_="panel-collapse")
@@ -40,4 +42,4 @@ def parse(url, options):
             added=today,
         )
         events.append(event)
-    return events
+    return events, f"({skipped_count} skipped)"
