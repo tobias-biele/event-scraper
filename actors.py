@@ -23,6 +23,10 @@ actors = {
         "parser_module": "parser.bmuv_rss",
         "url": "https://www.bmuv.de/events.rss",
     },
+    "bund": {
+        "parser_module": "parser.bund_html",
+        "url": "https://www.bund.net/service/termine/",
+    },
     "difu": {
         "parser_module": "parser.difu_rss",
         "url": "https://difu.de/rss/veranstaltungen",

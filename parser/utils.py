@@ -44,6 +44,20 @@ def format_date(str, format_type=0):
         # format: 01.01.21
         date = datetime.strptime(str, "%d.%m.%y")
         return date.strftime("%d.%m.%Y")
+    elif format_type == 4:
+        # format 01. Jan
+        str = str.replace("Jan", "Januar")
+        str = str.replace("Feb", "Februar")
+        str = str.replace("Mär", "März")
+        str = str.replace("Apr", "April")
+        str = str.replace("Jun", "Juni")
+        str = str.replace("Jul", "Juli")
+        str = str.replace("Aug", "August")
+        str = str.replace("Sep", "September")
+        str = str.replace("Okt", "Oktober")
+        str = str.replace("Nov", "November")
+        str = str.replace("Dez", "Dezember")
+        return format_date(str, 2)
     else:
         print("Unknown date format type")
         return None
