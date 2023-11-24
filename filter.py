@@ -1,4 +1,5 @@
 from excel import read_sheet, create_sheet
+import os
 
 # PARAMETER SECTION
 # --------------------------------
@@ -23,8 +24,12 @@ KEYWORDS = [
     ]
 # --------------------------------
 
-def filter_by_keywords(keywords):
-    events = read_sheet("data/events.xlsx")
+def filter_by_keywords(filename, keywords):
+    if not filename.endswith(".xlsx"):
+        print("Input must be an Excel file (.xlsx")
+    else:
+        filename = filename[:-5]
+    events = read_sheet(f"data/{filename}.xlsx")
     included = []
     excluded = []
     for event in events:
@@ -33,7 +38,11 @@ def filter_by_keywords(keywords):
                 included.append(event.to_xlsx_row())
                 break
         excluded.append(event.to_xlsx_row())
-    create_sheet(included, "data/events_filtered.xlsx")
-    create_sheet(excluded, "data/events_filtered_excluded.xlsx")
+    create_sheet(included, f"data/{filename}_filtered.xlsx")
+    create_sheet(excluded, f"data/{filename}_filtered_excluded.xlsx")
 
-filter_by_keywords(KEYWORDS)
+files = os.listdir("data")
+for file in files:
+    if file.endswith(".xlsx") and not file.endswith("_filtered.xlsx") and not file.endswith("_filtered_excluded.xlsx"):
+        print(f"Filtering file {file}")
+        filter_by_keywords(file, KEYWORDS)

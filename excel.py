@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from event import Event
 
-def create_sheet(data, filename="data/events.xlsx"):
+def create_sheet(data, filename):
     columns = [
         "Von", "Bis", "Uhrzeit", "Titel der Veranstaltung", "Thema",
         "Veranstaltende Institution/Organisation", "Ort", "Zielgruppe", "Link zur VA", "Eintragsdatum", "Detailseite Text"

@@ -58,6 +58,8 @@ def run(parse_details_pages=False, cut_off_date=None, include=None, exclude=None
             print(f"Error importing {actor_config['parser_module']}: {e}")
         except Exception as e:
             print(f"Error parsing {actor_name}: {e}")
-    create_sheet(xlsx_rows)
+    today = today_date_string()
+    output_filename = f"data/event_scraper_output_{today}.xlsx"
+    create_sheet(xlsx_rows, output_filename)
 
 run(parse_details_pages=True, cut_off_date=MINDESTDATUM, include=INCLUDE, exclude=EXCLUDE)
