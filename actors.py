@@ -27,6 +27,10 @@ actors = {
         "parser_module": "parser.bund_html",
         "url": "https://www.bund.net/service/termine/",
     },
+    "climate_adapt": {
+        "parser_module": "parser.climate_adapt_html",
+        "url": "https://climate-adapt.eea.europa.eu/de/more-events?set_language=de",
+    },
     "difu": {
         "parser_module": "parser.difu_rss",
         "url": "https://difu.de/rss/veranstaltungen",
