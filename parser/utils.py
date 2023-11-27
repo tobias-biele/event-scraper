@@ -27,25 +27,25 @@ def today_date():
 
 def format_date(str, format_type=0):
     if format_type == 0:
-        # format: 2021-01-01
+        # format: 2021-12-01
         date = datetime.strptime(str, "%Y-%m-%d")
         return date.strftime("%d.%m.%Y")
     elif format_type == 1:
-        # format: 01. Januar 2021
+        # format: 01. Dezember 2021
         date_format = "%d. %B %Y"
         date = datetime.strptime(str, date_format)
         return date.strftime("%d.%m.%Y")
     elif format_type == 2:
-        # format: 01. Januar
+        # format: 01. Dezember
         date_format = "%d. %B"
         date = datetime.strptime(str, date_format)
         return date.strftime("%d.%m")
     elif format_type == 3:
-        # format: 01.01.21
+        # format: 01.12.21
         date = datetime.strptime(str, "%d.%m.%y")
         return date.strftime("%d.%m.%Y")
     elif format_type == 4:
-        # format 01. Jan
+        # format 01. Dez
         str = str.replace("Jan", "Januar")
         str = str.replace("Feb", "Februar")
         str = str.replace("Mär", "März")
@@ -58,6 +58,32 @@ def format_date(str, format_type=0):
         str = str.replace("Nov", "November")
         str = str.replace("Dez", "Dezember")
         return format_date(str, 2)
+    elif format_type == 5:
+        # format 01 Dec 2021
+        str = str[:2] + "." + str[2:] # insert dot after day
+        str = str.replace("Jan", "Januar")
+        str = str.replace("Feb", "Februar")
+        str = str.replace("Mar", "März")
+        str = str.replace("Apr", "April")
+        str = str.replace("Jun", "Juni")
+        str = str.replace("Jul", "Juli")
+        str = str.replace("Aug", "August")
+        str = str.replace("Sep", "September")
+        str = str.replace("Oct", "Oktober")
+        str = str.replace("Nov", "November")
+        str = str.replace("Dec", "Dezember")
+        return format_date(str, 1)
+    elif format_type == 6:
+        # format 01 December 2021
+        str = str[:2] + "." + str[2:] # insert dot after day
+        str = str.replace("January", "Januar")
+        str = str.replace("February", "Februar")
+        str = str.replace("March", "März")
+        str = str.replace("June", "Juni")
+        str = str.replace("July", "Juli")
+        str = str.replace("October", "Oktober")
+        str = str.replace("December", "Dezember")
+        return format_date(str, 1)
     else:
         print("Unknown date format type")
         return None
