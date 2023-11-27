@@ -39,6 +39,10 @@ actors = {
         "parser_module": "parser.dwd_html",
         "url": "https://www.dwd.de/DE/service/termine/termine_node.html",
     },
+    "eu_mayors": {
+        "parser_module": "parser.eu_mayors_html",
+        "url": "https://eu-mayors.ec.europa.eu/en/events",
+    },
     "fona": {
         "parser_module": "parser.fona_html",
         "url": "https://www.fona.de/de/aktuelles/veranstaltungen/",
