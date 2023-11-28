@@ -31,6 +31,10 @@ actors = {
         "parser_module": "parser.climate_adapt_html",
         "url": "https://climate-adapt.eea.europa.eu/de/more-events?set_language=de",
     },
+    "cmcc": {
+        "parser_module": "parser.cmcc_html",
+        "url": "https://www.cmcc.it/lectures-conferences",
+    },
     "difu": {
         "parser_module": "parser.difu_rss",
         "url": "https://difu.de/rss/veranstaltungen",
