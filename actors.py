@@ -39,6 +39,10 @@ actors = {
         "parser_module": "parser.difu_rss",
         "url": "https://difu.de/rss/veranstaltungen",
     },
+    "dkk": {
+        "parser_module": "parser.dkk_html",
+        "url": "https://www.deutsches-klima-konsortium.de/index.php?id=130",
+    },
     "dwd": {
         "parser_module": "parser.dwd_html",
         "url": "https://www.dwd.de/DE/service/termine/termine_node.html",
