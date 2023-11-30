@@ -27,9 +27,15 @@ def parse(url, options):
             start_element = element.find("abbr", class_="dtstart")
             end_element = element.find("abbr", class_="dtend")
             if start_element:
-                start = start_element.get_text(strip=True)
+                start_text = start_element.get_text(strip=True)
+                if " um " in start_text:
+                    start_text = start_text.replace(" um ", " ")
+                start = start_text
             if end_element:
-                end = end_element.get_text(strip=True)
+                end_text = end_element.get_text(strip=True)
+                if " um " in end_text:
+                    end_text = end_text.replace(" um ", " ")
+                end = end_text
 
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
             skipped_count += 1
