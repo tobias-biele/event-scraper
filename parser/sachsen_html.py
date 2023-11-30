@@ -1,10 +1,7 @@
-import locale
 import requests
 from bs4 import BeautifulSoup
 from event import Event
 from .utils import today_date_string, format_date, unformat_date
-
-locale.setlocale(locale.LC_TIME, "de_DE")
 
 def parse(url, options):
     page = requests.get(url)
