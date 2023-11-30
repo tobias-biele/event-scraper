@@ -3,17 +3,6 @@ from actors import actors
 from excel import create_sheet
 from parser.utils import today_date_string
 
-# PARAMETER SECTION
-# --------------------------------
-DETAIL_SEITEN_SCRAPEN = True
-MINDESTDATUM = "heute"
-INCLUDE = None
-EXCLUDE = None
-# --------------------------------
-
-if MINDESTDATUM == "heute":
-    MINDESTDATUM = today_date_string(reverse_format=True)
-
 def run(parse_details_pages=False, cut_off_date=None, include=None, exclude=None):
     """
     Run the scraper.
@@ -61,5 +50,3 @@ def run(parse_details_pages=False, cut_off_date=None, include=None, exclude=None
     today = today_date_string()
     output_filename = f"data/event_scraper_output_{today}.xlsx"
     create_sheet(xlsx_rows, output_filename)
-
-run(parse_details_pages=True, cut_off_date=MINDESTDATUM, include=INCLUDE, exclude=EXCLUDE)
