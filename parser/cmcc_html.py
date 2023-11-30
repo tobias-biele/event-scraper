@@ -48,7 +48,7 @@ def parse(url, options):
             day = dates_div.find("span", class_="day").get_text(strip=True)
             month = dates_div.find("span", class_="month").get_text(strip=True)
             year = dates_div.find("span", class_="year").get_text(strip=True)
-            start = format_date(f"{day} {month} {year}", 6)
+            start = format_date(f"{day} {month} {year}")
 
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
             skipped_count += 1

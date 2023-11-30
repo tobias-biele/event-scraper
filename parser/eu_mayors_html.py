@@ -35,8 +35,8 @@ def parse_details_page(url):
             if start_date_str == end_date_str or end_date_str == None:
                 timeframe = f"{start_time_str} - {end_time_str}"
             else:
-                start = f"{format_date(start_date_str, 6)} {start_time_str}"
-                end = f"{format_date(end_date_str, 6)} {end_time_str}"
+                start = f"{format_date(start_date_str)} {start_time_str}"
+                end = f"{format_date(end_date_str)} {end_time_str}"
         organiser_dt = practical_info_div.find("dt", string="Organiser")
         if organiser_dt:
             actor = normalize_whitespace(organiser_dt.find_next_sibling("dd").get_text(strip=True))
@@ -62,12 +62,12 @@ def parse(url, options):
             if "-" in day:
                 day_start = day.split("-")[0]
                 day_end = day.split("-")[1]
-                start = format_date(f"{day_start} {month} {year}", 5)
-                end = format_date(f"{day_end} {month} {year}", 5)
+                start = format_date(f"{day_start} {month} {year}")
+                end = format_date(f"{day_end} {month} {year}")
             else:
                 month = date_element.find("abbr", class_="ecl-date-block__month").get_text(strip=True)
                 year = date_element.find("span", class_="ecl-date-block__year").get_text(strip=True)
-                start = format_date(f"{day} {month} {year}", 5)
+                start = format_date(f"{day} {month} {year}")
 
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
             skipped_count += 1

@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 from event import Event
-from .utils import today_date_string, format_date, normalize_whitespace, get_date_matches, get_time_matches, unformat_date
+from .utils import today_date_string, get_date_matches, get_time_matches, unformat_date
 
 def parse(url, options):
     page = requests.get(url)

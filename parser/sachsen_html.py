@@ -23,7 +23,7 @@ def parse(url, options):
             location = heading.split(" am")[0]
             # Get the start date of the event and skip it if it's before the cut-off date
             date_string = heading.split("am ")[1]
-            start = format_date(date_string, format_type=1)
+            start = format_date(date_string)
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
             skipped_count += 1
             continue

@@ -76,22 +76,20 @@ def parse(url, options):
                     if len(start_text) == 3:
                         # case 1
                         start_text = start_text + " " + end_month + " " + end_year
-                        start = format_date(start_text, 1)
+                        start = format_date(start_text)
                     else:
                         start_text_split = start_text.split(" ")
                         if len(start_text_split) == 2:
                             # case 2
-                            start = format_date(start_text, 4) + "." + end_year
-                        elif len(start_text_split) == 3:
-                            # case 3
-                            start_day, start_month, start_year = start_text_split
-                            start = format_date(start_day + " " + start_month, 4) + "." + start_year
-                    end = format_date(end_text, 1)
+                            start_text = start_text + " " + end_year
+                            start = format_date(start_text)
+                    start = format_date(start_text)
+                    end = format_date(end_text)
                 except Exception as e:
                     malformed_date = True
             else:
                 try:
-                    start = format_date(date, 1)
+                    start = format_date(date)
                 except:
                     malformed_date = True
             

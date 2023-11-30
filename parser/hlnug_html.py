@@ -41,12 +41,7 @@ def parse(url, options):
                 if len(date_matches_description[0]) > len(date_match):
                     date_match = date_matches_description[0]
             if date_match:
-                if i == 1:
-                    date_match_formatted = format_date(date_match, format_type=3)
-                elif i == 2:
-                    date_match_formatted = format_date(date_match, format_type=1)
-                elif i == 3:
-                    date_match_formatted = format_date(date_match, format_type=2)
+                date_match_formatted = format_date(date_match)
             if date_match != "" and len(date_match) > len(start):
                 start = date_match_formatted
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:

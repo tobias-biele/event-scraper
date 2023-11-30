@@ -30,20 +30,18 @@ def parse(url, options):
     skip_event = False
     for event_text in event_section.stripped_strings:
         if i == 0 or i == 2 and len(event_text) < 20: # if the text is a date, it will be shorter than 20 characters
-            start = event_text
-            if start[-1] == ":":
-                start = start[:-1]
-            start = format_date(start, 1)
+            if event_text[-1] == ":":
+                event_text = event_text[:-1]
+            start = format_date(event_text)
             if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
                 skipped_count += 1
                 skip_event = True # skip the event if it's before the cut-off date
             i += 1
         elif i == 1:
-            title = event_text
-            if title.startswith(": "):
-                title = title[2:]
-            if title.endswith(","):
-                title = title[:-1]
+            if event_text.startswith(": "):
+                title = event_text[2:]
+            if event_text.endswith(","):
+                title = event_text[:-1]
             i += 1
         else:
             if len(event_text) >= 20 and len(a_tags) > 0: # if the text is a link to "weitere Informationen", it will be at least 20 characters long
