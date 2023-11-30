@@ -4,8 +4,8 @@ from event import Event
 
 def create_sheet(data, filename):
     columns = [
-        "Von", "Bis", "Uhrzeit", "Titel der Veranstaltung", "Thema",
-        "Veranstaltende Institution/Organisation", "Ort", "Zielgruppe", "Link zur VA", "Eintragsdatum", "Detailseite Text"
+        "Von", "Bis", "Uhrzeit", "Titel der Veranstaltung", "Thema", "Veranstaltende Institution/Organisation", "Ort", "Zielgruppe", "Link zur VA", "Eintragsdatum", 
+        "Detailseite Text", "Quelle"
     ]
     df = pd.DataFrame(data, columns=columns)
     df['date_column'] = pd.to_datetime(df['Von'], format='%d.%m.%Y %H:%M', errors='coerce').combine_first(pd.to_datetime(df['Von'], format='%d.%m.%Y', errors='coerce'))

@@ -1,5 +1,6 @@
 import importlib
 from actors import actors
+from event import Event
 from excel import create_sheet
 from parser.utils import today_date_string
 
@@ -40,6 +41,8 @@ def run(parse_details_pages=False, cut_off_date=None, include=None, exclude=None
             parser_module = importlib.import_module(actor_config["parser_module"])
             parse = parser_module.parse
             events, skipped_message = parse(actor_config["url"], options)
+            for event in events:
+                event.origin = actor_name
             output_message = f"Scraped {len(events)} events from {actor_name} {skipped_message}"
             print(output_message)
             xlsx_rows.extend([event.to_xlsx_row() for event in events])
