@@ -14,9 +14,8 @@ def create_sheet(data, filename):
     # Create data directory if it doesn't exist
     if not os.path.exists("data"):
         os.makedirs("data")
-    excel_writer = pd.ExcelWriter(filename, engine="xlsxwriter")
-    df.to_excel(excel_writer, sheet_name="Veranstaltungen", index=False)
-    excel_writer._save()
+    with pd.ExcelWriter(filename) as writer:
+        df.to_excel(writer, index=False)
 
 def read_sheet(filename):
     try:

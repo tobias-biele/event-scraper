@@ -15,7 +15,7 @@ class Event:
         self.description = description
 
     def __repr__(self):
-        return f"Event(title={self.title}, start={self.start}, end={self.end}, actor={self.actor}, location={self.location}, link={self.link}, added={self.added})"
+        return f"Event(title={self.title}, start={self.start}, end={self.end}, timeframe={self.timeframe}, actor={self.actor}, location={self.location}, link={self.link}, added={self.added})"
     
     def to_xlsx_row(self):
         return [
