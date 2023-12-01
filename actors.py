@@ -63,6 +63,10 @@ actors = {
         "parser_module": "parser.hlnug_html",
         "url": "https://www.hlnug.de/themen/klimawandel-und-anpassung/aktuelles-termine",
     },
+    "idw": {
+        "parser_module": "parser.idw_html",
+        "url": "https://idw-online.de/de/calendar",
+    },
     "jki": {
         "parser_module": "parser.jki_html",
         "url": "https://www.julius-kuehn.de/veranstaltungen",

@@ -47,8 +47,8 @@ def read_sheet(filename):
                 target_group=target_group,
                 link=link,
                 added=added,
-                description=description
-                origin=origin
+                description=description,
+                origin=origin,
             )
             event_list.append(event)
 
