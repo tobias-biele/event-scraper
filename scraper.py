@@ -53,3 +53,4 @@ def run(parse_details_pages=False, cut_off_date=None, include=None, exclude=None
     today = today_date_string()
     output_filename = f"data/event_scraper_output_{today}.xlsx"
     create_sheet(xlsx_rows, output_filename)
+    print("Finished. The result can be found in the data directory.")

@@ -34,6 +34,7 @@ def read_sheet(filename):
             link = row["Link zur VA"]
             added = row["Eintragsdatum"]
             description = row["Detailseite Text"]
+            origin = row["Quelle"]
 
             # Create an Event object and add it to the list
             event = Event(
@@ -47,6 +48,7 @@ def read_sheet(filename):
                 link=link,
                 added=added,
                 description=description
+                origin=origin
             )
             event_list.append(event)
 
