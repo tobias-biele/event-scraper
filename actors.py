@@ -1,4 +1,8 @@
 actors = {
+    "arl": {
+        "parser_module": "parser.arl_html",
+        "url": "https://www.arl-net.de/de/events",
+    },
     "bbsr": {
         "parser_module": "parser.bbsr_html",
         "url": "https://www.bbsr.bund.de/BBSR/DE/service/veranstaltungen/_node.html",
