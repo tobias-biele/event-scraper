@@ -12,4 +12,4 @@ EXCLUDE = None
 if MINDESTDATUM == "heute":
     MINDESTDATUM = today_date_string(reverse_format=True)
 
-run(parse_details_pages=False, cut_off_date=MINDESTDATUM, include=INCLUDE, exclude=EXCLUDE)
+run(parse_details_pages=DETAIL_SEITEN_SCRAPEN, cut_off_date=MINDESTDATUM, include=INCLUDE, exclude=EXCLUDE)
