@@ -64,12 +64,12 @@ def parse(url, options):
 
         # Get the dates of the event and skip it if it's before the cut-off date
         date_matches = get_date_matches(date_location_column.get_text())
+        start = ""
+        end = ""
         if len(date_matches) > 0:
             start = date_matches[0]
         if len(date_matches) > 1:
             end = date_matches[1]
-        start = ""
-        end = ""
         if start != None and start != "" and options.get("cut_off_date", None) and unformat_date(start) < options["cut_off_date"]:
             skipped_count += 1
             continue
@@ -113,4 +113,4 @@ def parse(url, options):
             description=description,
         )
         events.append(event)
-    return events, f"({skipped_count} skipped)"
+    return events, f"({skipped_count} skipped [including duplicates])"
