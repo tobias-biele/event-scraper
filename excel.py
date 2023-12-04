@@ -19,7 +19,7 @@ def create_sheet(data, filename):
 
 def read_sheet(filename):
     try:
-        df = pd.read_excel(filename, sheet_name="Veranstaltungen")
+        df = pd.read_excel(filename)
         event_list = []
 
         for _, row in df.iterrows():
